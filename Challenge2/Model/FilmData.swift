@@ -9,7 +9,7 @@ import Foundation
 
 struct FilmData: Codable {
     var id: Int
-    var description: String
+    var overview: String
     var title: String
-    var image_path: String?
+    var poster_path: String?
 }
