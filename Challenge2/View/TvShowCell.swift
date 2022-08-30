@@ -1,19 +1,12 @@
-//
-//  TvShowCell.swift
-//  Challenge2
-//
-//  Created by Tatyana Sidoryuk on 29.08.2022.
-//
-
 import UIKit
 
 class TvShowCell: UITableViewCell {
     
-    
-    // Заглушка1
-    var tvShowCount = 4
-    // Заглушка1
-    var tvShowArray = [TvShowData(id: 1, name: "Во все тяжкие", poster_path: "", poster: "samplePoster", release_date: "1.2022"), TvShowData(id: 2, name: "Друзья", poster_path: "", poster: "samplePoster", release_date: "2.2022"), TvShowData(id: 3, name: "Игры престолов", poster_path: "", poster: "samplePoster", release_date: "3.2022"), TvShowData(id: 4, name: "Зеркало", poster_path: "", poster: "samplePoster", release_date: "4.2022")]
+    var tvShowsArray = [CinemaData]() {
+        didSet {
+            self.tvShowCollection.reloadData()
+        }
+    }
     
     private lazy var tvShowCollection: UICollectionView  = {
         let layout = UICollectionViewFlowLayout()
@@ -66,23 +59,23 @@ extension TvShowCell: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        sideInset
+        self.sideInset
     }
 }
 
 extension TvShowCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.tvShowCount
+        self.tvShowsArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
-        
-        if self.tvShowCount != 0 {
-            cell.setupCell(title: tvShowArray[indexPath.row].name, release_Date: tvShowArray[indexPath.row].release_date, poster: tvShowArray[indexPath.row].poster)
-        }
+        let tvShow = tvShowsArray[indexPath.row]
+        cell.setupCell(title: tvShow.name ?? "Error",
+                       release_Date: tvShow.first_air_date ?? "2000",
+                       poster: tvShow.poster_path)
         
         return cell
     }

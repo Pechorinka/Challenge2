@@ -1,9 +1,3 @@
-//
-//  CollectionViewCell.swift
-//  Challenge2
-//
-//  Created by Tatyana Sidoryuk on 29.08.2022.
-//
 
 import UIKit
 
@@ -42,7 +36,7 @@ class CollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .black
-        setupView()
+        self.setupView()
     }
     
 
@@ -51,24 +45,24 @@ class CollectionViewCell: UICollectionViewCell {
     }
 
     private func setupView() {
-        contentView.addSubview(posterView)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(dateLabel)
+        self.contentView.addSubview(self.posterView)
+        self.contentView.addSubview(self.nameLabel)
+        self.contentView.addSubview(self.dateLabel)
         
         NSLayoutConstraint.activate([
             
-            posterView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            posterView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            posterView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            posterView.bottomAnchor.constraint(equalTo: nameLabel.topAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            nameLabel.bottomAnchor.constraint(equalTo: dateLabel.topAnchor),
-            nameLabel.heightAnchor.constraint(equalToConstant: 27),
-            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            dateLabel.heightAnchor.constraint(equalToConstant: 20),
+            self.posterView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            self.posterView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            self.posterView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            self.posterView.bottomAnchor.constraint(equalTo: self.nameLabel.topAnchor),
+            self.nameLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            self.nameLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            self.nameLabel.bottomAnchor.constraint(equalTo: self.dateLabel.topAnchor),
+            self.nameLabel.heightAnchor.constraint(equalToConstant: 27),
+            self.dateLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+            self.dateLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            self.dateLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            self.dateLabel.heightAnchor.constraint(equalToConstant: 20),
             
         ])
     }
@@ -80,6 +74,6 @@ class CollectionViewCell: UICollectionViewCell {
         
         // Заглушка2 Сделать загрузку фото
         
-        posterView.image = UIImage (named: "samplePoster.jpg")
+        self.posterView.image = UIImage (named: "samplePoster.jpg")
     }
 }

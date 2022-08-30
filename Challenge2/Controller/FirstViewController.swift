@@ -4,6 +4,7 @@ import UIKit
 class FirstViewController: UIViewController {
     
     private let firstView = FirstView()
+    let apiClient = FilmsAPIClient()
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -11,10 +12,34 @@ class FirstViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(firstView)
+        self.view.addSubview(self.firstView)
         self.firstView.translatesAutoresizingMaskIntoConstraints = false
-        firstView.backgroundColor = .black
-        setupConstraints()
+        self.firstView.backgroundColor = .black
+        self.setupConstraints()
+        
+        self.apiClient.getPopularMovie {
+            [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let movies):
+                self.firstView.filmsArray = movies
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        self.apiClient.getPopularTvShow {
+            [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let movies):
+                self.firstView.tvShowsArray = movies
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
     func setupConstraints () {

@@ -1,9 +1,3 @@
-//
-//  HeaderCell.swift
-//  Challenge2
-//
-//  Created by Tatyana Sidoryuk on 29.08.2022.
-//
 
 import UIKit
 

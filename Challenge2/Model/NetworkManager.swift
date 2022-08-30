@@ -1,58 +1,60 @@
 
-import UIKit
+import Foundation
 
-protocol NetworkManagerDelegate {
-    func didUpdateCinemas(cinemas: [CinemaData])
-    func didFailWithError(error: Error)
+enum APIEndpoints: String {
+    case popularFilms = "movie/popular"
+    case popularTvShow = "tv/popular"
 }
 
 class NetworkManager {
-
-    var delegate: NetworkManagerDelegate?
     private let baseUrl = "https://api.themoviedb.org/3"
     private let apiKey = "ab31c35bc448b2b8ac1df7a1fa526ca7"
     private let session = URLSession(configuration: .default)
     
-    func getPopularMovie() {
-        let urlString = "\(self.baseUrl)/movie/popular?api_key=\(self.apiKey)&language=en-US&page=1"
+    func request<D: Decodable>(
+        apiEnpoint: APIEndpoints,
+        for dataModel: D.Type,
+        completion: @escaping (Result<D, Error>) -> Void
+    ) {
+        let urlString = "\(self.baseUrl)/\(apiEnpoint.rawValue)?api_key=\(self.apiKey)&language=en-US&page=1"
         print(urlString)
         
         guard let url = URL(string: urlString) else { return }
-      
+        
         self.session.dataTask(with: url) {
             [weak self] (data, _, error) in
             guard let self = self else { return }
-            self.handleResponse(with: data, error: error)
+            self.handleResponse(with: data, error: error, completion: completion)
         }.resume()
     }
+   
 }
 
 private extension NetworkManager {
     
-    func handleResponse(with data: Data?, error: Error?) {
+    func handleResponse<D: Decodable>(with data: Data?, error: Error?, completion: @escaping  (Result<D, Error>) -> Void) {
         if let error = error {
-            self.delegate?.didFailWithError(error: error)
+            completion(.failure(error))
             return
         }
        
-        guard let safeData = data,
-              let popularCinemas = self.parseJSON(safeData) else {
-            self.delegate?.didFailWithError(error: NSError(domain: "NetworkManager", code: 1))
+        guard let data = data,
+              let model = self.parseJSON(data, to: D.self) else {
+            completion(.failure(NSError(domain: "NetworkManager", code: 1)))
             return
         }
         
-        self.delegate?.didUpdateCinemas(cinemas: popularCinemas)
+        DispatchQueue.main.async {
+            completion(.success(model))
+        }
     }
     
-    func parseJSON(_ data: Data) -> [CinemaData]? {
+    func parseJSON<D: Decodable>(_ data: Data, to model: D.Type) -> D? {
         let decoder = JSONDecoder()
         do {
-            let decoderData = try decoder.decode(PopularInCinema.self, from: data)
-            let lastPrice = decoderData.popularInCinema
-            print(lastPrice)
-            return lastPrice
+            return try decoder.decode(model, from: data)
         } catch {
-            self.delegate?.didFailWithError(error: error)
+            print("parse error: \(error)")
             return nil
         }
     }

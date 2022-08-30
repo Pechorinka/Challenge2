@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 
 struct ActorsData: Codable {
     var id: Int
