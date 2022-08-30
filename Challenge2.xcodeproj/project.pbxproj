@@ -24,6 +24,7 @@
 		2AC88DB928BBE39A00E12885 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AC88DB828BBE39A00E12885 /* Assets.xcassets */; };
 		2AC88DBC28BBE39A00E12885 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC88DBA28BBE39A00E12885 /* LaunchScreen.storyboard */; };
 		7768981928BE3DA100C854E9 /* FilmDescriptionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7768981828BE3DA100C854E9 /* FilmDescriptionData.swift */; };
+		7768981B28BE67A300C854E9 /* FilmsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7768981A28BE67A300C854E9 /* FilmsAPIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		2AC88DBB28BBE39A00E12885 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2AC88DBD28BBE39A00E12885 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7768981828BE3DA100C854E9 /* FilmDescriptionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDescriptionData.swift; sourceTree = "<group>"; };
+		7768981A28BE67A300C854E9 /* FilmsAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsAPIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				7768981828BE3DA100C854E9 /* FilmDescriptionData.swift */,
 				2A77499528BC93140034E631 /* ActorsData.swift */,
 				2A77499128BBF5750034E631 /* NetworkManager.swift */,
+				7768981A28BE67A300C854E9 /* FilmsAPIClient.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -113,8 +116,8 @@
 			children = (
 				2AC88DAF28BBE39800E12885 /* AppDelegate.swift */,
 				2AC88DB128BBE39800E12885 /* SceneDelegate.swift */,
-				2A99722128BCEB8A007E4A61 /* View */,
 				2A77498828BBF0530034E631 /* Model */,
+				2A99722128BCEB8A007E4A61 /* View */,
 				2A77498A28BBF0830034E631 /* Controller */,
 				2AC88DB828BBE39A00E12885 /* Assets.xcassets */,
 				2A132F1128BDDFDA00032E95 /* samplePoster.jpg */,
@@ -195,7 +198,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
 				0ABC810D28BE32000091AA06 /* SecondCollectionViewCell.swift in Sources */,
 				2A77499628BC93140034E631 /* ActorsData.swift in Sources */,
 				2A99722728BCED85007E4A61 /* TvShowCell.swift in Sources */,
@@ -204,12 +206,12 @@
 				2AC88DB228BBE39800E12885 /* SceneDelegate.swift in Sources */,
 				2A77499228BBF5750034E631 /* NetworkManager.swift in Sources */,
 				2A77498E28BBF1CC0034E631 /* SecondViewController.swift in Sources */,
-
 				2A132F1028BD448200032E95 /* CollectionViewCell.swift in Sources */,
 				7768981928BE3DA100C854E9 /* FilmDescriptionData.swift in Sources */,
 				2A77498C28BBF1B20034E631 /* FirstViewController.swift in Sources */,
 				2A99722328BCEBA2007E4A61 /* FirstView.swift in Sources */,
 				2A77499028BBF45E0034E631 /* FilmData.swift in Sources */,
+				7768981B28BE67A300C854E9 /* FilmsAPIClient.swift in Sources */,
 				2A99722528BCED32007E4A61 /* FilmCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,21 +1,15 @@
-//
-//  FilmCell.swift
-//  Challenge2
-//
-//  Created by Tatyana Sidoryuk on 29.08.2022.
-//
 
 import UIKit
 
 class FilmCell: UITableViewCell {
     
+    var filmsArray = [CinemaData]() {
+        didSet {
+            self.filmCollection.reloadData()
+        }
+    }
     
-    // Заглушка1
-    var filmsCount = 5
-    // Заглушка1
-    var filmsArray = [FilmData(id: 1, overview: "ddd", title: "Тор", poster_path: "", poster: "samplePoster", release_date: "01.2022"), FilmData(id: 2, overview: "ddd", title: "Аватар", poster_path: "", poster: "samplePoster", release_date: "02.2022"), FilmData(id: 3, overview: "ddd", title: "Железный человек", poster_path: "", poster: "samplePoster", release_date: "03.2022"), FilmData(id: 4, overview: "ddd", title: "Супермен", poster_path: "", poster: "samplePoster", release_date: "04.2022"), FilmData(id: 5, overview: "ddd", title: "Фильм", poster_path: "", poster: "samplePoster", release_date: "05.2022")]
-    
-    private lazy var filmCollection: UICollectionView  = {
+    private lazy var filmCollection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -66,24 +60,24 @@ extension FilmCell: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        sideInset
+        self.sideInset
     }
 }
 
 extension FilmCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.filmsCount
+        filmsArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
+        let film = filmsArray[indexPath.row]
         
-        if self.filmsCount != 0 {
-            cell.setupCell(title: filmsArray[indexPath.row].title, release_Date: filmsArray[indexPath.row].release_date, poster: filmsArray[indexPath.row].poster)
-        }
-        
+        cell.setupCell(title: film.title ?? "Error",
+                       release_Date: film.release_date ?? "2000",
+                       poster: film.poster_path)
         return cell
     }
     

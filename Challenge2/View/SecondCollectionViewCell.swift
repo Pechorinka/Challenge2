@@ -1,10 +1,3 @@
-//
-//  SecondCollectionViewCell.swift
-//  Challenge2
-//
-//  Created by Вячеслав Терентьев on 30.08.2022.
-//
-
 import UIKit
 
 class DetailCollectionViewCell: UICollectionViewCell {
@@ -45,8 +38,8 @@ class DetailCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setupViews()
-        setConstraints()
+        self.setupViews()
+        self.setConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -54,28 +47,28 @@ class DetailCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupViews() {
-        backgroundColor = .black
-        addSubview(castImageView)
-        addSubview(nameActorLabel)
-        addSubview(roleLabel)
+        self.backgroundColor = .black
+        self.addSubview(self.castImageView)
+        self.addSubview(self.nameActorLabel)
+        self.addSubview(self.roleLabel)
     }
     
     private func setConstraints() {
         
         NSLayoutConstraint.activate([
-            castImageView.heightAnchor.constraint(equalToConstant: 90),
-            castImageView.widthAnchor.constraint(equalToConstant: 90),
-            castImageView.centerXAnchor.constraint(equalTo: centerXAnchor)
+            self.castImageView.heightAnchor.constraint(equalToConstant: 90),
+            self.castImageView.widthAnchor.constraint(equalToConstant: 90),
+            self.castImageView.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            nameActorLabel.topAnchor.constraint(equalTo: castImageView.bottomAnchor, constant: 3),
-            nameActorLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+            self.nameActorLabel.topAnchor.constraint(equalTo: self.castImageView.bottomAnchor, constant: 3),
+            self.nameActorLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            roleLabel.topAnchor.constraint(equalTo: nameActorLabel.bottomAnchor, constant: 3),
-            roleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+            self.roleLabel.topAnchor.constraint(equalTo: self.nameActorLabel.bottomAnchor, constant: 3),
+            self.roleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
 }
