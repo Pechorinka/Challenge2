@@ -58,7 +58,7 @@ extension FirstView: UITableViewDataSource, UITableViewDelegate {
         
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell", for: indexPath) as! HeaderCell
-                cell.myLabel.text = "Popular Movie"
+                cell.myLabel.text = "Фильмы"
                 cell.myLabel.font = UIFont.systemFont(ofSize: 23)
             return cell
             
@@ -68,7 +68,7 @@ extension FirstView: UITableViewDataSource, UITableViewDelegate {
             
             case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell", for: indexPath) as! HeaderCell
-                cell.myLabel.text = "TV Show"
+                cell.myLabel.text = "Сериалы"
                 cell.myLabel.font = UIFont.systemFont(ofSize: 23)
                 return cell
             

@@ -10,6 +10,7 @@ import Foundation
 struct TvShowData: Codable {
     var id: Int
     var name: String
-    var overview: String
     var poster_path: String?
+    var poster: String
+    var release_date: String
 }

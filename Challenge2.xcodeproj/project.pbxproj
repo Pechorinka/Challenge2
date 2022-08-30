@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A132F1028BD448200032E95 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A132F0F28BD448200032E95 /* CollectionViewCell.swift */; };
+		2A132F1228BDDFDA00032E95 /* samplePoster.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2A132F1128BDDFDA00032E95 /* samplePoster.jpg */; };
 		2A77498C28BBF1B20034E631 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A77498B28BBF1B20034E631 /* FirstViewController.swift */; };
 		2A77498E28BBF1CC0034E631 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A77498D28BBF1CC0034E631 /* SecondViewController.swift */; };
 		2A77499028BBF45E0034E631 /* FilmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A77498F28BBF45E0034E631 /* FilmData.swift */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A132F0F28BD448200032E95 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		2A132F1128BDDFDA00032E95 /* samplePoster.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = samplePoster.jpg; sourceTree = "<group>"; };
 		2A77498B28BBF1B20034E631 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		2A77498D28BBF1CC0034E631 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		2A77498F28BBF45E0034E631 /* FilmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmData.swift; sourceTree = "<group>"; };
@@ -80,6 +84,7 @@
 				2A99722828BCF018007E4A61 /* HeaderCell.swift */,
 				2A99722428BCED32007E4A61 /* FilmCell.swift */,
 				2A99722628BCED84007E4A61 /* TvShowCell.swift */,
+				2A132F0F28BD448200032E95 /* CollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -109,6 +114,7 @@
 				2A77498828BBF0530034E631 /* Model */,
 				2A77498A28BBF0830034E631 /* Controller */,
 				2AC88DB828BBE39A00E12885 /* Assets.xcassets */,
+				2A132F1128BDDFDA00032E95 /* samplePoster.jpg */,
 				2AC88DBA28BBE39A00E12885 /* LaunchScreen.storyboard */,
 				2AC88DBD28BBE39A00E12885 /* Info.plist */,
 			);
@@ -175,6 +181,7 @@
 			files = (
 				2AC88DBC28BBE39A00E12885 /* LaunchScreen.storyboard in Resources */,
 				2AC88DB928BBE39A00E12885 /* Assets.xcassets in Resources */,
+				2A132F1228BDDFDA00032E95 /* samplePoster.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +200,7 @@
 				2AC88DB228BBE39800E12885 /* SceneDelegate.swift in Sources */,
 				2A77499228BBF5750034E631 /* NetworkManager.swift in Sources */,
 				2A77498E28BBF1CC0034E631 /* SecondViewController.swift in Sources */,
+				2A132F1028BD448200032E95 /* CollectionViewCell.swift in Sources */,
 				2A77498C28BBF1B20034E631 /* FirstViewController.swift in Sources */,
 				2A99722328BCEBA2007E4A61 /* FirstView.swift in Sources */,
 				2A77499028BBF45E0034E631 /* FilmData.swift in Sources */,
