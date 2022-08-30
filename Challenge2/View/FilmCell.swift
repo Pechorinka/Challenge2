@@ -75,8 +75,8 @@ extension FilmCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
         let film = filmsArray[indexPath.row]
         
-        cell.setupCell(title: film.title ?? "Error",
-                       release_Date: film.release_date ?? "2000",
+        cell.setupCell(title: (film.title ?? film.name)!,
+                       release_Date: (film.release_date ?? film.first_air_date)!,
                        poster: film.poster_path)
         return cell
     }
