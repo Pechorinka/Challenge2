@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0ABC810D28BE32000091AA06 /* SecondCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC810C28BE32000091AA06 /* SecondCollectionViewCell.swift */; };
 		2A132F1028BD448200032E95 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A132F0F28BD448200032E95 /* CollectionViewCell.swift */; };
 		2A132F1228BDDFDA00032E95 /* samplePoster.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2A132F1128BDDFDA00032E95 /* samplePoster.jpg */; };
 		2A77498C28BBF1B20034E631 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A77498B28BBF1B20034E631 /* FirstViewController.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0ABC810C28BE32000091AA06 /* SecondCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCollectionViewCell.swift; sourceTree = "<group>"; };
 		2A132F0F28BD448200032E95 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		2A132F1128BDDFDA00032E95 /* samplePoster.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = samplePoster.jpg; sourceTree = "<group>"; };
 		2A77498B28BBF1B20034E631 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				2A99722428BCED32007E4A61 /* FilmCell.swift */,
 				2A99722628BCED84007E4A61 /* TvShowCell.swift */,
 				2A132F0F28BD448200032E95 /* CollectionViewCell.swift */,
+				0ABC810C28BE32000091AA06 /* SecondCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ABC810D28BE32000091AA06 /* SecondCollectionViewCell.swift in Sources */,
 				2A77499428BC85100034E631 /* TvShowData.swift in Sources */,
 				2A77499628BC93140034E631 /* ActorsData.swift in Sources */,
 				2A99722728BCED85007E4A61 /* TvShowCell.swift in Sources */,
