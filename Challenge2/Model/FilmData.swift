@@ -1,11 +1,14 @@
+import UIKit
 
-import Foundation
+struct PopularInCinema: Codable {
+    var popularInCinema: [CinemaData] = []
 
-struct FilmData: Codable {
-    var id: Int = 1
-    var overview: String = "Просто описание фильма"
-    var title: String = "Тор"
+struct CinemaData: Codable {
     var poster_path: String?
-    var poster: String
-    var release_date: String = "22.02.2022"
+    var id: Int?
+    var title: String?
+    var release_date: String?
 }
+
+
+
