@@ -38,7 +38,6 @@ class DetailCollectionViewCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 12, weight: .medium)
         label.text = "Сотрудник ЦРУ"
         label.textColor = .gray
-
         return label
     }()
         
