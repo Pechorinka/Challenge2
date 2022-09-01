@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = .white
 
-        window?.rootViewController = AppNavigationController(rootViewController: FirstViewController())
+        window?.rootViewController = AppNavigationController(rootViewController: SecondViewController())
         
         window?.makeKeyAndVisible()
         
@@ -37,6 +37,8 @@ class AppNavigationController: UINavigationController {
     }
     
     func setupNavigationBar() {
-        self.setNavigationBarHidden(true, animated: false)
+        
+        self.navigationBar.barTintColor = .green
+//        self.setNavigationBarHidden(true, animated: false)
     }
 }
