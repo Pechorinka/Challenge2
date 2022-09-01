@@ -3,6 +3,8 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
+    var networkManager = NetworkManager()
+    
     public func DateFromWebtoApp(_ date: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -84,8 +86,16 @@ class CollectionViewCell: UICollectionViewCell {
         self.nameLabel.text = title
         self.dateLabel.text = DateFromWebtoApp(release_Date)
         
-        // Заглушка2 Сделать загрузку фото
+        let link = "https://image.tmdb.org/t/p/w500" + poster
         
-        self.posterView.image = UIImage (named: "samplePoster.jpg")
+        self.networkManager.getImage(imageType: link) { (result) in
+            switch result {
+            case .success(let data):
+                self.posterView.image = UIImage (data: data)
+            case .failure(let error):
+                print(error)
+
+            }
+        }
     }
 }
