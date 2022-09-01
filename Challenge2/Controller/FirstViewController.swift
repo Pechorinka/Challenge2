@@ -3,7 +3,10 @@ import UIKit
 
 class FirstViewController: UIViewController {
     
+    var isFilm = true // нажали на фильм или сериал?
+
     private let firstView = FirstView()
+    
     let apiClient = FilmsAPIClient()
     
     override var prefersStatusBarHidden: Bool {
@@ -40,6 +43,11 @@ class FirstViewController: UIViewController {
                 print(error)
             }
         }
+        
+        firstView.toNextVC = {
+            let nextVC = SecondViewController()
+            self.present(nextVC, animated: true, completion: nil)
+        }
     }
 
     func setupConstraints () {
@@ -58,3 +66,15 @@ class FirstViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
     }
 }
+
+
+//MARK: - CellClickedDelegate
+/*extension FirstViewController: CellClickedDelegate {
+    
+    func didClickCell(id: Int, isFilm: Bool) {
+        let nextVC = SecondViewController()
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        self.isFilm = isFilm
+    }
+}
+*/

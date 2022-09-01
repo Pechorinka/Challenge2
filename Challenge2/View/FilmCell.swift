@@ -1,7 +1,10 @@
 
 import UIKit
 
+
 class FilmCell: UITableViewCell {
+    
+    var nextVC :(() -> Void)?
     
     var filmsArray = [CinemaData]() {
         didSet {
@@ -64,7 +67,7 @@ extension FilmCell: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension FilmCell: UICollectionViewDataSource {
+extension FilmCell: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         filmsArray.count
@@ -73,6 +76,7 @@ extension FilmCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
+        
         let film = filmsArray[indexPath.row]
         
         cell.setupCell(title: (film.title ?? film.name)!,
@@ -80,5 +84,8 @@ extension FilmCell: UICollectionViewDataSource {
                        poster: film.poster_path)
         return cell
     }
-    
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.nextVC?()
+    }
 }

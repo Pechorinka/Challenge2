@@ -3,6 +3,17 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
+    public func DateFromWebtoApp(_ date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.date(from: date)
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        let thisDate = dateFormatter.string(from: date!)
+        let first = String(thisDate.prefix(1)).capitalized
+        let other = String(thisDate.dropFirst())
+        return first+other
+    }
+    
     private lazy var posterView: UIImageView = {
         let poster = UIImageView()
         poster.clipsToBounds = true
@@ -70,7 +81,7 @@ class CollectionViewCell: UICollectionViewCell {
     func setupCell(title: String, release_Date: String, poster: String) {
         
         self.nameLabel.text = title
-        self.dateLabel.text = release_Date
+        self.dateLabel.text = DateFromWebtoApp(release_Date)
         
         // Заглушка2 Сделать загрузку фото
         

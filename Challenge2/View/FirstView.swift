@@ -3,9 +3,11 @@ import UIKit
 
 class FirstView: UIView {
     
+    var toNextVC :(() -> Void)?
+    
     var favouritesCount = 2
     
-    var favouritesArray = [CinemaData(poster_path: "", id: 100, title: "Первый", name: "Первый", release_date: "22/00/2020", first_air_date: "22/01/2022"), CinemaData(poster_path: "", id: 120, title: "Второй", name: "Втоорой", release_date: "21/00/2020", first_air_date: "21/01/2022")]
+    var favouritesArray = [CinemaData(poster_path: "", id: 100, title: "Первый", name: "Первый", release_date: "2020-01-21", first_air_date: "2020-01-21"), CinemaData(poster_path: "", id: 120, title: "Второй", name: "Втоорой", release_date: "2020-01-21", first_air_date: "2020-01-21")]
     
     
     var filmsArray = [CinemaData]() {
@@ -77,6 +79,9 @@ extension FirstView: UITableViewDataSource, UITableViewDelegate {
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FilmCell", for: indexPath) as! FilmCell
             cell.filmsArray = self.filmsArray
+            cell.nextVC = {
+                self.toNextVC?()
+            }
             return cell
             
         case 3:
@@ -88,6 +93,9 @@ extension FirstView: UITableViewDataSource, UITableViewDelegate {
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FilmCell", for: indexPath) as! FilmCell
             cell.filmsArray = self.tvShowsArray
+            cell.nextVC = {
+                self.toNextVC?()
+            }
             return cell
             
         case 5:
@@ -99,6 +107,9 @@ extension FirstView: UITableViewDataSource, UITableViewDelegate {
         case 6:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FilmCell", for: indexPath) as! FilmCell
             cell.filmsArray = self.favouritesArray
+            cell.nextVC = {
+                self.toNextVC?()
+            }
             return cell
             
         default :
