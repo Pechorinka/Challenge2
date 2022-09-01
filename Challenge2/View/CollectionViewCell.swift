@@ -8,10 +8,11 @@ class CollectionViewCell: UICollectionViewCell {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let date = dateFormatter.date(from: date)
         dateFormatter.dateFormat = "MMM dd, yyyy"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         let thisDate = dateFormatter.string(from: date!)
         let first = String(thisDate.prefix(1)).capitalized
         let other = String(thisDate.dropFirst())
-        return first+other
+        return first+other  
     }
     
     private lazy var posterView: UIImageView = {
