@@ -26,7 +26,6 @@ class FirstView: UIView {
         let tableView = UITableView(frame: self.bounds, style: .plain)
         tableView.backgroundColor = .black
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(HeaderCell.self, forCellReuseIdentifier: "HeaderCell")
         tableView.register(FilmCell.self, forCellReuseIdentifier: "FilmCell")
         tableView.separatorStyle = .none
         tableView.delegate = self
@@ -64,56 +63,35 @@ extension FirstView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.section {
+
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell", for: indexPath) as! HeaderCell
-            cell.myLabel.text = "WOWTeam"
-            cell.myLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-            return cell
-            
-        case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell", for: indexPath) as! HeaderCell
-            cell.myLabel.text = "Фильмы"
-            cell.myLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
-            return cell
-            
-        case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FilmCell", for: indexPath) as! FilmCell
             cell.filmsArray = self.filmsArray
+            cell.headerLabel.text = "Popular Movie"
             cell.nextVC = {
                 self.toNextVC?()
             }
             return cell
-            
-        case 3:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell", for: indexPath) as! HeaderCell
-            cell.myLabel.text = "Сериалы"
-            cell.myLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
-            return cell
-            
-        case 4:
+        case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FilmCell", for: indexPath) as! FilmCell
             cell.filmsArray = self.tvShowsArray
+            cell.headerLabel.text = "TV Show"
             cell.nextVC = {
                 self.toNextVC?()
             }
             return cell
-            
-        case 5:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell", for: indexPath) as! HeaderCell
-            cell.myLabel.text = "Избранное"
-            cell.myLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
-            return cell
-            
-        case 6:
+
+        case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FilmCell", for: indexPath) as! FilmCell
             cell.filmsArray = self.favouritesArray
+            cell.headerLabel.text = "Favourites"
             cell.nextVC = {
                 self.toNextVC?()
             }
             return cell
             
         default :
-            let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell", for: indexPath) as! HeaderCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FilmCell", for: indexPath) as! FilmCell
             return cell
             
         }
@@ -121,24 +99,17 @@ extension FirstView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if favouritesCount == 0 {
-            switch indexPath.section {
-            case 0: return 60
-            case 1: return 50
-            case 2: return (self.frame.size.height)/3.5
-            case 3: return 50
-            case 4: return (self.frame.size.height)/4
-            default: return 0
+             switch indexPath.section {
+             case 0: return (self.frame.size.height)/2.5
+             case 1: return (self.frame.size.height)/2.8
+             default: return 0
             }
         } else {
             switch indexPath.section {
-            case 0: return 60
-            case 1: return 50
+            case 0: return (self.frame.size.height)/2.5
+            case 1: return (self.frame.size.height)/2.8
             case 2: return (self.frame.size.height)/3
-            case 3: return 50
-            case 4: return (self.frame.size.height)/4
-            case 5: return 50
-            case 6: return (self.frame.size.height)/5
-            default: return 0
+              default: return 0
             }
         }
     }
@@ -149,8 +120,8 @@ extension FirstView: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if favouritesCount == 0 {
-        return 5
-        } else { return 7 }
+        return 2
+        } else { return 3 }
     }
 }
 
