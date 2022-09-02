@@ -3,11 +3,6 @@ import UIKit
 
 class FirstView: UIView {
     
-    var favouritesCount = 2
-    
-    var favouritesArray = [CinemaData(poster_path: "", id: 100, title: "Первый", name: "Первый", release_date: "22/00/2020", first_air_date: "22/01/2022"), CinemaData(poster_path: "", id: 120, title: "Второй", name: "Втоорой", release_date: "21/00/2020", first_air_date: "21/01/2022")]
-    
-    
     var filmsArray = [CinemaData]() {
         didSet {
             self.tableView.reloadData()
@@ -34,7 +29,7 @@ class FirstView: UIView {
     
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
-        self.backgroundColor = .green
+        self.backgroundColor = .black
         self.setupUI()
     }
     
@@ -98,7 +93,7 @@ extension FirstView: UITableViewDataSource, UITableViewDelegate {
             
         case 6:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FilmCell", for: indexPath) as! FilmCell
-            cell.filmsArray = self.favouritesArray
+            cell.filmsArray = self.filmsArray
             return cell
             
         default :
@@ -109,7 +104,7 @@ extension FirstView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if favouritesCount == 0 {
+        if filmsArray.count == 0 {
             switch indexPath.section {
             case 0: return 60
             case 1: return 50
@@ -137,7 +132,7 @@ extension FirstView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if favouritesCount == 0 {
+        if filmsArray.count == 0 {
         return 5
         } else { return 7 }
     }

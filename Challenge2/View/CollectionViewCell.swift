@@ -71,9 +71,6 @@ class CollectionViewCell: UICollectionViewCell {
         
         self.nameLabel.text = title
         self.dateLabel.text = release_Date
-        
-        // Заглушка2 Сделать загрузку фото
-        
         self.posterView.image = UIImage (named: "samplePoster.jpg")
     }
 }
