@@ -27,6 +27,28 @@ class NetworkManager {
             self.handleResponse(with: data, error: error, completion: completion)
         }.resume()
     }
+    
+    
+    func getImage(imageType: String, completion: @escaping (Result<Data, Error>) -> Void) {
+        
+        guard let imageURL = URL(string: imageType) else { return }
+        
+        let session = URLSession(configuration: .default)
+
+        
+        let task = session.dataTask(with: imageURL) { (data, response, error) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print(error)
+                    completion(.failure(error))
+                    return
+                }
+                guard let data = data else { return }
+                completion(.success(data))
+            }
+        }
+        task.resume()
+    }
    
 }
 

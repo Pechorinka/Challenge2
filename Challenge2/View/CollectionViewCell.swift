@@ -3,6 +3,20 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
+    var networkManager = NetworkManager()
+    
+    public func DateFromWebtoApp(_ date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.date(from: date)
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        let thisDate = dateFormatter.string(from: date!)
+        let first = String(thisDate.prefix(1)).capitalized
+        let other = String(thisDate.dropFirst())
+        return first+other  
+    }
+    
     private lazy var posterView: UIImageView = {
         let poster = UIImageView()
         poster.clipsToBounds = true
@@ -70,7 +84,18 @@ class CollectionViewCell: UICollectionViewCell {
     func setupCell(title: String, release_Date: String, poster: String) {
         
         self.nameLabel.text = title
-        self.dateLabel.text = release_Date
-        self.posterView.image = UIImage (named: "samplePoster.jpg")
+        self.dateLabel.text = DateFromWebtoApp(release_Date)
+        
+        let link = "https://image.tmdb.org/t/p/w500" + poster
+        
+        self.networkManager.getImage(imageType: link) { (result) in
+            switch result {
+            case .success(let data):
+                self.posterView.image = UIImage (data: data)
+            case .failure(let error):
+                print(error)
+
+            }
+        }
     }
 }

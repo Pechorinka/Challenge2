@@ -24,7 +24,7 @@ class SecondViewController: UIViewController {
         let button = UIBarButtonItem(image: UIImage(systemName: "chevron.left"),
                                      style: .plain,
                                      target: self,
-                                     action: #selector(self.closeButtonTapped)
+                                     action: #selector(self.popViewControler)
                                      )
         button.tintColor = UIColor.red
         
@@ -45,9 +45,8 @@ class SecondViewController: UIViewController {
         print("bookmarkButtonTapped")
     }
     
-    @objc private func closeButtonTapped() {
-        self.navigationController?.dismiss(animated: true)
-        print("I can fly")
+    @objc func popViewControler(){
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

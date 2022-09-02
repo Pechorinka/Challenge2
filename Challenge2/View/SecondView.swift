@@ -118,7 +118,6 @@ class SecondView: UIView {
         collectionView.backgroundColor = .none
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.isScrollEnabled = false
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(DetailCollectionViewCell.self, forCellWithReuseIdentifier: self.idCollectionView)

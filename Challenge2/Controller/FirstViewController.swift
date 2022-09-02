@@ -3,6 +3,8 @@ import UIKit
 
 class FirstViewController: UIViewController {
     
+    var isFilm = true // нажали на фильм или сериал?
+
     private let firstView = FirstView()
     let apiClient = FilmsAPIClient()
     
@@ -37,6 +39,13 @@ class FirstViewController: UIViewController {
                 print(error)
             }
         }
+        
+        firstView.toNextVC = {
+            [weak self] in
+            guard let self = self else { return }
+            let nextVC = SecondViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
     }
 
 //    override func viewWillAppear(_ animated: Bool) {
@@ -63,3 +72,15 @@ extension UIViewController {
     }
     
 }
+
+
+//MARK: - CellClickedDelegate
+/*extension FirstViewController: CellClickedDelegate {
+    
+    func didClickCell(id: Int, isFilm: Bool) {
+        let nextVC = SecondViewController()
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        self.isFilm = isFilm
+    }
+}
+*/
