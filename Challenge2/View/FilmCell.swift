@@ -83,17 +83,17 @@ extension FilmCell: UICollectionViewDelegateFlowLayout {
 extension FilmCell: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        filmsArray.count
+        self.filmsArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
         
-        let film = filmsArray[indexPath.row]
+        let film = self.filmsArray[indexPath.row]
         
-        cell.setupCell(title: (film.title ?? film.name)!,
-                       release_Date: (film.release_date ?? film.first_air_date)!,
+        cell.setupCell(title: (film.title ?? film.name) ?? "Error",
+                       release_Date: (film.release_date ?? film.first_air_date) ?? "2000",
                        poster: film.poster_path)
         return cell
     }

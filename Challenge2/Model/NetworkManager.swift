@@ -16,7 +16,7 @@ class NetworkManager {
         for dataModel: D.Type,
         completion: @escaping (Result<D, Error>) -> Void
     ) {
-        let urlString = "\(self.baseUrl)/\(apiEnpoint.rawValue)?api_key=\(self.apiKey)&language=en-US&page=1"
+        let urlString = "\(self.baseUrl)/\(apiEnpoint.rawValue)?api_key=\(self.apiKey)&language=en-US"
         print(urlString)
         
         guard let url = URL(string: urlString) else { return }
@@ -84,10 +84,10 @@ private extension NetworkManager {
 
 
 
-//популярные фильмы https://api.themoviedb.org/3/movie/popular?api_key=ab31c35bc448b2b8ac1df7a1fa526ca7&language=en-US&page=1
+//популярные фильмы https://api.themoviedb.org/3/movie/popular?api_key=ab31c35bc448b2b8ac1df7a1fa526ca7&language=en-US
 //Данные о конкретном фильме https://api.themoviedb.org/3/movie/550?api_key=ab31c35bc448b2b8ac1df7a1fa526ca7
 //Даные о касте https://api.themoviedb.org/3/movie/550/credits?api_key=ab31c35bc448b2b8ac1df7a1fa526ca7&language=en-US
 
-//Популярные сериалы https://api.themoviedb.org/3/tv/popular?api_key=ab31c35bc448b2b8ac1df7a1fa526ca7&language=en-US&page=1
+//Популярные сериалы https://api.themoviedb.org/3/tv/popular?api_key=ab31c35bc448b2b8ac1df7a1fa526ca7&language=en-US
 //Данные о конкретном сериале https://api.themoviedb.org/3/tv/94997?api_key=ab31c35bc448b2b8ac1df7a1fa526ca7&language=en-US
 //Данные о касте сериала https://api.themoviedb.org/3/tv/94997/aggregate_credits?api_key=ab31c35bc448b2b8ac1df7a1fa526ca7&language=en-US

@@ -5,7 +5,7 @@ class DetailCollectionViewCell: UICollectionViewCell {
     let castImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.backgroundColor = .white
-        imageView.image = UIImage(named: "castActor")
+        imageView.image = UIImage(named: "samplePoster")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 1
@@ -47,10 +47,10 @@ class DetailCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupViews() {
-        self.backgroundColor = .black
-        self.addSubview(self.castImageView)
-        self.addSubview(self.nameActorLabel)
-        self.addSubview(self.roleLabel)
+        self.contentView.backgroundColor = .black
+        self.contentView.addSubview(self.castImageView)
+        self.contentView.addSubview(self.nameActorLabel)
+        self.contentView.addSubview(self.roleLabel)
     }
     
     private func setConstraints() {
