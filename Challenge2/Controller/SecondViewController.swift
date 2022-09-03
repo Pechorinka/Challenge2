@@ -10,23 +10,25 @@ class SecondViewController: UIViewController {
                                 filmDescription: "члопаловрпловымоятчмтядлстж]яьдьс")
     
     private lazy var bookmarkButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: UIImage(systemName: "bookmark"),
+        let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold, scale: .default)
+        let button = UIBarButtonItem(image: UIImage(systemName: "bookmark", withConfiguration: config),
                                      style: .plain,
                                      target: self,
                                      action: #selector(self.bookmarkButtonTapped)
                                      )
-        button.tintColor = UIColor.red
-        
+        button.tintColor = UIColor.white
+
         return button
     }()
     
     private lazy var closeButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: UIImage(systemName: "chevron.left"),
+        let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold, scale: .default)
+        let button = UIBarButtonItem(image: UIImage(systemName: "chevron.left", withConfiguration: config),
                                      style: .plain,
                                      target: self,
                                      action: #selector(self.popViewControler)
                                      )
-        button.tintColor = UIColor.red
+        button.tintColor = UIColor.white
         
         return button
     }()
@@ -38,6 +40,7 @@ class SecondViewController: UIViewController {
         self.setupNavigationBar()
         
         self.navigationItem.rightBarButtonItem = self.bookmarkButton
+
         self.navigationItem.leftBarButtonItem = self.closeButton
     }
         
