@@ -7,8 +7,9 @@ class SecondView: UIView {
     private let year: String
     private let genres: String
     private let runtime: String
-    private let getStarsRating: Int
+    private let getStarsRating: Double
     private let filmDescription: String
+    private let idOfCinema: Int = 610150
     
     
 //        private lazy var shadowView: UIView = {
@@ -60,6 +61,21 @@ class SecondView: UIView {
             images.append(self.makeStars())
         }
         
+        if self.getStarsRating >= 2 {
+            images[0].tintColor = .yellow
+        }
+        if self.getStarsRating >= 4 {
+            images[1].tintColor = .yellow
+        }
+        if self.getStarsRating >= 6 {
+            images[2].tintColor = .yellow
+        }
+        if self.getStarsRating >= 8 {
+        images[3].tintColor = .yellow
+        }
+        if self.getStarsRating == 10 {
+        images[4].tintColor = .yellow
+        }
         return images
     }()
     ///Создаем стек с 5 звездочками
@@ -186,14 +202,14 @@ class SecondView: UIView {
          year: String,
          genres: String,
          runtime: String,
-         getStarsRating: Int,
+         vote_average: Double,
          filmDescription: String) {
         
         self.nameFilm = nameFilm
         self.year = year
         self.genres = genres
         self.runtime = runtime
-        self.getStarsRating = getStarsRating
+        self.getStarsRating = vote_average
         self.filmDescription = filmDescription
         
         super.init(frame: .zero)
@@ -206,40 +222,12 @@ class SecondView: UIView {
     }
     
     @objc private func watchNowButtonTapped() {
-        print("Watch Now")
+        // если фильм
+        UIApplication.shared.open(URL(string: "https://www.themoviedb.org/movie/" + "\(idOfCinema)")! as URL, options: [:], completionHandler: nil)
+        
+        // если сериал
+        // UIApplication.shared.open(URL(string: "https://www.themoviedb.org/tv" + "\(id)")! as URL, options: [:], completionHandler: nil)
     }
-    
-    ///Функция для показа рейтинга
-    //    private func setStars() {
-    //
-    //        let firstRange = 7...10
-    //        let secondRange = 5...7
-    //        let thirdRange = 4...5
-    //        let fourthRange = 3...4
-    //        let fithRange = 1...3
-    //
-    ////        if firstRange ~= getStarsRating {
-    ////            firstStarImageView.tintColor = .systemYellow
-    ////            secondStarImageView.tintColor = .systemYellow
-    ////            thirdStarImageView.tintColor = .systemYellow
-    ////            fourthStarImageView.tintColor = .systemYellow
-    ////            fithStarImageView.tintColor = .systemYellow
-    ////        } else if secondRange ~= getStarsRating {
-    ////            firstStarImageView.tintColor = .systemYellow
-    ////            secondStarImageView.tintColor = .systemYellow
-    ////            thirdStarImageView.tintColor = .systemYellow
-    ////            fourthStarImageView.tintColor = .systemYellow
-    ////        } else if thirdRange ~= getStarsRating {
-    ////            firstStarImageView.tintColor = .systemYellow
-    ////            secondStarImageView.tintColor = .systemYellow
-    ////            thirdStarImageView.tintColor = .systemYellow
-    ////        } else if fourthRange ~= getStarsRating {
-    ////            firstStarImageView.tintColor = .systemYellow
-    ////            secondStarImageView.tintColor = .systemYellow
-    ////        } else if fithRange ~= getStarsRating {
-    ////            firstStarImageView.tintColor = .systemYellow
-    ////        }
-    //    }
     
     private func setupViews() {
         self.backgroundColor = .black
@@ -290,11 +278,10 @@ extension SecondView: UICollectionViewDataSource {
 
 private extension SecondView {
     
-    ///Функция для создания звездочки
     func makeStars() -> UIImageView {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "star.fill")
-        imageView.tintColor = .white
+        imageView.tintColor = .gray
         
         imageView.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 30.0).isActive = true
