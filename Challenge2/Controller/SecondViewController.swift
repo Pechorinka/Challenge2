@@ -6,7 +6,7 @@ class SecondViewController: UIViewController {
                                 year: "2020",
                                 genres: "Драма",
                                 runtime: "2 часа 30 минут",
-                                getStarsRating: 6,
+                                vote_average: 8.6,
                                 filmDescription: "члопаловрпловымоятчмтядлстж]яьдьс")
     
     private lazy var bookmarkButton: UIBarButtonItem = {
