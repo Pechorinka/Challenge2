@@ -4,7 +4,7 @@ struct PopularInCinema: Decodable {
     var results: [CinemaData] = []
 }
 
-struct CinemaData: Decodable {
+struct CinemaData: Codable {
     var poster_path: String
     var id: Int
     var title: String?

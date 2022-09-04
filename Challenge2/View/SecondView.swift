@@ -259,12 +259,11 @@ class SecondView: UIView {
             self.descriptionLabel.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, constant: -20),
             self.castLabel.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, constant: -20),
             self.collectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            self.collectionView.heightAnchor.constraint(equalToConstant: 130),
+            self.collectionView.heightAnchor.constraint(equalToConstant: 160),
             
             self.filmImageView.bottomAnchor.constraint(equalTo: self.textStackView.topAnchor, constant: 20.0),
         ])
     }
-    
 }
 
 extension SecondView: UICollectionViewDelegateFlowLayout {

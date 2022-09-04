@@ -27,7 +27,7 @@ class DetailCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .black
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 12, weight: .medium)
         label.textColor = .gray

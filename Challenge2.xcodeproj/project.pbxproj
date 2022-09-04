@@ -25,6 +25,8 @@
 		7768983D28C0B7E600C854E9 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7768983C28C0B7E600C854E9 /* SecondView.swift */; };
 		7768984228C109CC00C854E9 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7768984128C109CC00C854E9 /* UIView+Constraints.swift */; };
 		7768984828C4D46800C854E9 /* FavoriteMovieData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7768984728C4D46800C854E9 /* FavoriteMovieData.swift */; };
+		7768984A28C4DD1200C854E9 /* SaveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7768984928C4DD1200C854E9 /* SaveData.swift */; };
+		7768984D28C4E21E00C854E9 /* CodableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7768984C28C4E21E00C854E9 /* CodableStorage.swift */; };
 		A07A15E632BB1AF927E06B9B /* Pods_Challenge2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5600C75E4192CE29E37A4AB5 /* Pods_Challenge2.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +53,8 @@
 		7768983C28C0B7E600C854E9 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 		7768984128C109CC00C854E9 /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		7768984728C4D46800C854E9 /* FavoriteMovieData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteMovieData.swift; sourceTree = "<group>"; };
+		7768984928C4DD1200C854E9 /* SaveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveData.swift; sourceTree = "<group>"; };
+		7768984C28C4E21E00C854E9 /* CodableStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableStorage.swift; sourceTree = "<group>"; };
 		C2A1F5EE6CD2470A6817688B /* Pods-Challenge2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Challenge2.debug.xcconfig"; path = "Target Support Files/Pods-Challenge2/Pods-Challenge2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,9 +76,9 @@
 				2A77498F28BBF45E0034E631 /* FilmData.swift */,
 				7768981828BE3DA100C854E9 /* FilmDescriptionData.swift */,
 				2A77499528BC93140034E631 /* ActorsData.swift */,
+				7768984728C4D46800C854E9 /* FavoriteMovieData.swift */,
 				2A77499128BBF5750034E631 /* NetworkManager.swift */,
 				7768981A28BE67A300C854E9 /* FilmsAPIClient.swift */,
-				7768984728C4D46800C854E9 /* FavoriteMovieData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -124,6 +128,7 @@
 				2AC88DAF28BBE39800E12885 /* AppDelegate.swift */,
 				2AC88DB128BBE39800E12885 /* SceneDelegate.swift */,
 				7768984128C109CC00C854E9 /* UIView+Constraints.swift */,
+				7768984B28C4E20600C854E9 /* Storage */,
 				2A77498828BBF0530034E631 /* Model */,
 				2A99722128BCEB8A007E4A61 /* View */,
 				2A77498A28BBF0830034E631 /* Controller */,
@@ -132,6 +137,15 @@
 				2AC88DBD28BBE39A00E12885 /* Info.plist */,
 			);
 			path = Challenge2;
+			sourceTree = "<group>";
+		};
+		7768984B28C4E20600C854E9 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				7768984928C4DD1200C854E9 /* SaveData.swift */,
+				7768984C28C4E21E00C854E9 /* CodableStorage.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		9EAD072FB2ECC35C355C955A /* Pods */ = {
@@ -265,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7768984A28C4DD1200C854E9 /* SaveData.swift in Sources */,
 				0ABC810D28BE32000091AA06 /* SecondCollectionViewCell.swift in Sources */,
 				2A77499628BC93140034E631 /* ActorsData.swift in Sources */,
 				2AC88DB028BBE39800E12885 /* AppDelegate.swift in Sources */,
@@ -274,6 +289,7 @@
 				2A77498E28BBF1CC0034E631 /* SecondViewController.swift in Sources */,
 				2A132F1028BD448200032E95 /* CollectionViewCell.swift in Sources */,
 				7768981928BE3DA100C854E9 /* FilmDescriptionData.swift in Sources */,
+				7768984D28C4E21E00C854E9 /* CodableStorage.swift in Sources */,
 				2A77498C28BBF1B20034E631 /* FirstViewController.swift in Sources */,
 				2A99722328BCEBA2007E4A61 /* FirstView.swift in Sources */,
 				2A77499028BBF45E0034E631 /* FilmData.swift in Sources */,

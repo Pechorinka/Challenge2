@@ -17,9 +17,12 @@ class FirstView: UIView {
         }
     }
     
-    var favoriteFilmsArray = [FavoriteMovieData]() {
+    private lazy var favoritesStorage = FavoriteMovieDataStorage()
+    
+    lazy var favoriteFilmsArray = self.favoritesStorage.films {
         didSet {
             self.tableView.reloadData()
+            self.favoritesStorage.updateFilms(self.favoriteFilmsArray)
         }
     }
     
@@ -28,16 +31,17 @@ class FirstView: UIView {
         tableView.backgroundColor = .black
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(FilmCell.self, forCellReuseIdentifier: "FilmCell")
-        tableView.separatorStyle = .none
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorColor = .clear
         return tableView
     } ()
     
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         self.backgroundColor = .black
-        
+    
         self.setupUI()
     }
     
