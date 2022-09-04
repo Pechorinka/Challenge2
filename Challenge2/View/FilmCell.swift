@@ -1,5 +1,7 @@
 
 import UIKit
+import SkeletonView
+
 
 class FilmCell: UITableViewCell {
     
@@ -93,6 +95,9 @@ extension FilmCell: UICollectionViewDataSource, UICollectionViewDelegate {
         
         let film = self.filmsArray[indexPath.row]
         
+   //     self.isSkeletonable = true
+   //     self.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .black, secondaryColor: .darkGray), animation: nil, transition: .crossDissolve(5))
+        
         let posterPath = self.apiConstructor.getImageURL(with: film.poster_path)
         
         cell.setupCell(
@@ -100,6 +105,8 @@ extension FilmCell: UICollectionViewDataSource, UICollectionViewDelegate {
             release_Date: (film.release_date ?? film.first_air_date) ?? "2000",
             posterURL: posterPath
         )
+    //    self.stopSkeletonAnimation()
+     //   self.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(5))
 
         return cell
     }
