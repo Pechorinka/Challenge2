@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-enum CinemaType: Int, Decodable {
+enum CinemaType: Int, Codable {
     case films
     case tvShows
 }

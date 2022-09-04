@@ -6,8 +6,6 @@ class FirstViewController: UIViewController {
     private let firstView = FirstView()
     let apiClient = FilmsAPIClient()
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
