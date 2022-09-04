@@ -27,7 +27,8 @@ class DetailCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .black
-        label.numberOfLines = 0
+        label.numberOfLines = 1
+        label.textAlignment = .center
         label.font = .systemFont(ofSize: 12, weight: .medium)
         label.textColor = .gray
 
@@ -67,7 +68,8 @@ class DetailCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             self.roleLabel.topAnchor.constraint(equalTo: self.nameActorLabel.bottomAnchor, constant: 3),
-            self.roleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+            self.roleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 3),
+            self.roleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -3),
         ])
     }
     
