@@ -24,6 +24,7 @@
 		7768981B28BE67A300C854E9 /* FilmsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7768981A28BE67A300C854E9 /* FilmsAPIClient.swift */; };
 		7768983D28C0B7E600C854E9 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7768983C28C0B7E600C854E9 /* SecondView.swift */; };
 		7768984228C109CC00C854E9 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7768984128C109CC00C854E9 /* UIView+Constraints.swift */; };
+		7768984828C4D46800C854E9 /* FavoriteMovieData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7768984728C4D46800C854E9 /* FavoriteMovieData.swift */; };
 		A07A15E632BB1AF927E06B9B /* Pods_Challenge2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5600C75E4192CE29E37A4AB5 /* Pods_Challenge2.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		7768981A28BE67A300C854E9 /* FilmsAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsAPIClient.swift; sourceTree = "<group>"; };
 		7768983C28C0B7E600C854E9 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 		7768984128C109CC00C854E9 /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
+		7768984728C4D46800C854E9 /* FavoriteMovieData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteMovieData.swift; sourceTree = "<group>"; };
 		C2A1F5EE6CD2470A6817688B /* Pods-Challenge2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Challenge2.debug.xcconfig"; path = "Target Support Files/Pods-Challenge2/Pods-Challenge2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +74,7 @@
 				2A77499528BC93140034E631 /* ActorsData.swift */,
 				2A77499128BBF5750034E631 /* NetworkManager.swift */,
 				7768981A28BE67A300C854E9 /* FilmsAPIClient.swift */,
+				7768984728C4D46800C854E9 /* FavoriteMovieData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				2A77498C28BBF1B20034E631 /* FirstViewController.swift in Sources */,
 				2A99722328BCEBA2007E4A61 /* FirstView.swift in Sources */,
 				2A77499028BBF45E0034E631 /* FilmData.swift in Sources */,
+				7768984828C4D46800C854E9 /* FavoriteMovieData.swift in Sources */,
 				7768981B28BE67A300C854E9 /* FilmsAPIClient.swift in Sources */,
 				2A99722528BCED32007E4A61 /* FilmCell.swift in Sources */,
 				7768984228C109CC00C854E9 /* UIView+Constraints.swift in Sources */,
