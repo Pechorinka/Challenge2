@@ -3,8 +3,6 @@ import UIKit
 
 class FirstViewController: UIViewController {
     
-    var isFilm = true // нажали на фильм или сериал?
-
     private let firstView = FirstView()
     let apiClient = FilmsAPIClient()
     
@@ -41,20 +39,37 @@ class FirstViewController: UIViewController {
         }
         
         firstView.toNextVC = {
-            [weak self] in
+            [weak self] type, filmID in
             guard let self = self else { return }
-            let nextVC = SecondViewController()
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            
+            switch type {
+                
+            case .popularMovie, .tvShos:
+                let nextVC = SecondViewController()
+                nextVC.cinemaType = .init(filmsTableSection: type)!
+                nextVC.filmID = filmID
+                self.navigationController?.pushViewController(nextVC, animated: true)
+                
+            case .favourites:
+                break
+                
+            }
+            
         }
     }
+}
 
-//    override func viewWillAppear(_ animated: Bool) {
-//        navigationController?.isNavigationBarHidden = true
-//    }
-//
-//    override func viewWillDisappear(_ animated: Bool) {
-//        navigationController?.isNavigationBarHidden = false
-//    }
+extension CinemaType {
+    init?(filmsTableSection: FilmsTableSection) {
+        switch filmsTableSection {
+        case .popularMovie:
+            self = .films
+        case .tvShos:
+            self = .tvShows
+        case .favourites:
+            return nil
+        }
+    }
 }
 
 extension UIViewController {
@@ -72,15 +87,3 @@ extension UIViewController {
     }
     
 }
-
-
-//MARK: - CellClickedDelegate
-/*extension FirstViewController: CellClickedDelegate {
-    
-    func didClickCell(id: Int, isFilm: Bool) {
-        let nextVC = SecondViewController()
-        self.navigationController?.pushViewController(nextVC, animated: true)
-        self.isFilm = isFilm
-    }
-}
-*/

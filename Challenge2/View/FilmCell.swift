@@ -1,16 +1,18 @@
 
 import UIKit
 
-
 class FilmCell: UITableViewCell {
     
-    var nextVC :(() -> Void)?
-    
+    var onFilmTap: ((FilmsTableSection, Int) -> Void)?
     var filmsArray = [CinemaData]() {
         didSet {
             self.filmCollection.reloadData()
         }
     }
+    
+    private let apiConstructor = FilmsAPIConstructor()
+    
+    var cinemaType: FilmsTableSection = .popularMovie
     
     public lazy var headerLabel: UILabel = {
         let label = UILabel()
@@ -87,18 +89,23 @@ extension FilmCell: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
         
         let film = self.filmsArray[indexPath.row]
         
-        cell.setupCell(title: (film.title ?? film.name) ?? "Error",
-                       release_Date: (film.release_date ?? film.first_air_date) ?? "2000",
-                       poster: film.poster_path)
+        let posterPath = self.apiConstructor.getImageURL(with: film.poster_path)
+        
+        cell.setupCell(
+            title: (film.title ?? film.name) ?? "Error",
+            release_Date: (film.release_date ?? film.first_air_date) ?? "2000",
+            posterURL: posterPath
+        )
+
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.nextVC?()
+        let filmID = self.filmsArray[indexPath.row].id
+        self.onFilmTap?(self.cinemaType, filmID)
     }
 }

@@ -1,11 +1,11 @@
 import UIKit
+import Kingfisher
 
 class DetailCollectionViewCell: UICollectionViewCell {
     
-    let castImageView: UIImageView = {
+    private lazy var castImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.backgroundColor = .white
-        imageView.image = UIImage(named: "samplePoster")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 1
@@ -17,7 +17,6 @@ class DetailCollectionViewCell: UICollectionViewCell {
     
     private lazy var nameActorLabel: UILabel = {
         let label = UILabel()
-        label.text = "Роберт Паттинсон"
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -28,8 +27,8 @@ class DetailCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .black
+        label.numberOfLines = 0
         label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.text = "Сотрудник ЦРУ"
         label.textColor = .gray
 
         return label
@@ -70,5 +69,11 @@ class DetailCollectionViewCell: UICollectionViewCell {
             self.roleLabel.topAnchor.constraint(equalTo: self.nameActorLabel.bottomAnchor, constant: 3),
             self.roleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
+    }
+    
+    func setupCell(nameActorLabel: String, roleLabel: String, posterURL: URL?) {
+        self.nameActorLabel.text = nameActorLabel
+        self.roleLabel.text = roleLabel
+        self.castImageView.kf.setImage(with: posterURL, placeholder: UIImage(named: "no-photo"))
     }
 }

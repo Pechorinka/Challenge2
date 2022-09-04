@@ -1,37 +1,35 @@
 import UIKit
+import Kingfisher
 
 class SecondView: UIView {
     
     private let idCollectionView = "idCollectionView"
+    
+    private let apiConstructor = FilmsAPIConstructor()
     private let nameFilm: String
     private let year: String
-    private let genres: String
-    private let runtime: String
-    private let getStarsRating: Double
+    private let genres: [String]
+    private let runtime: Double
+    private let getStarsRating: Float
     private let filmDescription: String
-    private let idOfCinema: Int = 610150
+    private let posterURL: URL?
+    private let cast: ActorsData
     
-    
-//        private lazy var shadowView: UIView = {
-//           let view = UIView()
-//            view.backgroundColor = .black
-//            view.layer.shadowColor = UIColor.red.cgColor
-//            view.layer.shadowOffset = CGSize(width: 0, height: 0)
-//            view.layer.shadowRadius = 200
-//            view.layer.shadowOpacity = 1
-//            view.layer.borderWidth = 1
-//            view.layer.borderColor = UIColor.blue.cgColor
-//            view.translatesAutoresizingMaskIntoConstraints = false
-//            return view
-//        }()
-    
+    private lazy var shadowView: UIImageView = {
+        let iv = UIImageView()
+        iv.image = UIImage(named: "gradient")
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        
+        return iv
+    }()
     
     private lazy var filmImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .red
-        imageView.image = UIImage(named: "samplePoster")
+        imageView.kf.setImage(with: posterURL)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
+        imageView.addSubview(shadowView)
 
         return imageView
     }()
@@ -40,6 +38,8 @@ class SecondView: UIView {
         let label = UILabel()
         label.text = self.nameFilm
         label.textColor = .white
+        label.numberOfLines = 0
+        label.textAlignment = .center
         label.font = .systemFont(ofSize: 52, weight: .bold)
 
         return label
@@ -47,9 +47,12 @@ class SecondView: UIView {
     
     private lazy var genreLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(self.year), \(self.genres), \(self.runtime)"
+        let genres = self.genres.joined(separator: ",")
+        
+        label.text = "\(self.year), \(genres), \((self.runtime * 60.0).asString(style: .short))"
         label.textColor = .white
         label.numberOfLines = 0
+        label.textAlignment = .center
 
         return label
     }()
@@ -118,7 +121,7 @@ class SecondView: UIView {
     
     private lazy var castLabel: UILabel = {
         let label = UILabel()
-        label.text = "Актёрский состав:"
+        label.text = "Cast:"
         label.font = UIFont.systemFont(ofSize: 26, weight: .medium)
         label.textColor = .white
         label.textAlignment = .left
@@ -200,17 +203,21 @@ class SecondView: UIView {
     
     init(nameFilm: String,
          year: String,
-         genres: String,
-         runtime: String,
-         vote_average: Double,
-         filmDescription: String) {
-        
+         genres: [String],
+         runtime: Double,
+         getStarsRating: Float,
+         filmDescription: String,
+         posterURL: URL?,
+         cast: ActorsData
+    ) {
         self.nameFilm = nameFilm
         self.year = year
         self.genres = genres
         self.runtime = runtime
         self.getStarsRating = vote_average
         self.filmDescription = filmDescription
+        self.posterURL = posterURL
+        self.cast = cast
         
         super.init(frame: .zero)
         
@@ -236,6 +243,8 @@ class SecondView: UIView {
         self.contentScrollView.addSubview(self.contentView)
         self.contentView.pin(to: self.contentScrollView)
         self.contentStackView.pin(to: self.contentView)
+        self.shadowView.pin(to: self.filmImageView)
+        
         
         NSLayoutConstraint.activate([
             
@@ -254,6 +263,7 @@ class SecondView: UIView {
             self.filmImageView.bottomAnchor.constraint(equalTo: self.textStackView.topAnchor, constant: 20.0),
             ])
     }
+    
 }
 
 extension SecondView: UICollectionViewDelegateFlowLayout {
@@ -267,11 +277,21 @@ extension SecondView: UICollectionViewDelegateFlowLayout {
 extension SecondView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        self.cast.cast.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: idCollectionView, for: indexPath) as! DetailCollectionViewCell
+        
+        let cast = self.cast.cast[indexPath.row]
+        
+        let posterPath = self.apiConstructor.getImageURL(with: cast.profile_path ?? "")
+//        
+        cell.setupCell(
+            nameActorLabel: cast.name,
+            roleLabel: (cast.character ?? cast.roles?[0].character) ?? "",
+            posterURL: posterPath)
+        
         return cell
     }
 }
@@ -287,5 +307,17 @@ private extension SecondView {
         imageView.widthAnchor.constraint(equalToConstant: 30.0).isActive = true
         
         return imageView
+    }
+}
+
+private extension Double {
+    
+    func asString(style: DateComponentsFormatter.UnitsStyle) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, ]
+        formatter.unitsStyle = style
+        formatter.calendar?.locale = Locale(identifier: "en")
+        
+        return formatter.string(from: self) ?? ""
     }
 }

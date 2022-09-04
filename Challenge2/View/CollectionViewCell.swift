@@ -1,10 +1,9 @@
 
 import UIKit
+import Kingfisher
 
 class CollectionViewCell: UICollectionViewCell {
-    
-    var networkManager = NetworkManager()
-    
+
     public func DateFromWebtoApp(_ date: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -64,7 +63,6 @@ class CollectionViewCell: UICollectionViewCell {
         self.contentView.addSubview(self.dateLabel)
         
         NSLayoutConstraint.activate([
-            
             self.posterView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             self.posterView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             self.posterView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
@@ -77,25 +75,12 @@ class CollectionViewCell: UICollectionViewCell {
             self.dateLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             self.dateLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
             self.dateLabel.heightAnchor.constraint(equalToConstant: 20),
-            
         ])
     }
     
-    func setupCell(title: String, release_Date: String, poster: String) {
-        
+    func setupCell(title: String, release_Date: String, posterURL: URL?) {
         self.nameLabel.text = title
         self.dateLabel.text = DateFromWebtoApp(release_Date)
-        
-        let link = "https://image.tmdb.org/t/p/w500" + poster
-        
-        self.networkManager.getImage(imageType: link) { (result) in
-            switch result {
-            case .success(let data):
-                self.posterView.image = UIImage (data: data)
-            case .failure(let error):
-                print(error)
-
-            }
-        }
+        self.posterView.kf.setImage(with: posterURL)
     }
 }
