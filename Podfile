@@ -6,5 +6,6 @@ target 'Challenge2' do
   use_frameworks!
 
   pod 'Kingfisher', '~> 7.0'
+  pod 'SkeletonView'
 
 end

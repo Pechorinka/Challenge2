@@ -2,6 +2,7 @@
 import UIKit
 import Kingfisher
 
+
 class CollectionViewCell: UICollectionViewCell {
 
     public func DateFromWebtoApp(_ date: String) -> String {
@@ -79,8 +80,14 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
     func setupCell(title: String, release_Date: String, posterURL: URL?) {
+        self.isSkeletonable = true
+        self.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .black, secondaryColor: .darkGray), animation: nil, transition: .crossDissolve(1))
+        
         self.nameLabel.text = title
         self.dateLabel.text = DateFromWebtoApp(release_Date)
         self.posterView.kf.setImage(with: posterURL)
+        
+        self.stopSkeletonAnimation()
+        self.hideSkeleton(reloadDataAfter: false, transition: .crossDissolve(1))
     }
 }
