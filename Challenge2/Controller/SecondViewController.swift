@@ -95,5 +95,3 @@ class SecondViewController: UIViewController {
         return first+other
     }
 }
-
-
