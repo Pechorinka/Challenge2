@@ -214,7 +214,7 @@ class SecondView: UIView {
         self.year = year
         self.genres = genres
         self.runtime = runtime
-        self.getStarsRating = vote_average
+        self.getStarsRating = getStarsRating
         self.filmDescription = filmDescription
         self.posterURL = posterURL
         self.cast = cast
@@ -230,7 +230,7 @@ class SecondView: UIView {
     
     @objc private func watchNowButtonTapped() {
         // если фильм
-        UIApplication.shared.open(URL(string: "https://www.themoviedb.org/movie/" + "\(idOfCinema)")! as URL, options: [:], completionHandler: nil)
+//        UIApplication.shared.open(URL(string: "https://www.themoviedb.org/movie/" + "\(idOfCinema)")! as URL, options: [:], completionHandler: nil)
         
         // если сериал
         // UIApplication.shared.open(URL(string: "https://www.themoviedb.org/tv" + "\(id)")! as URL, options: [:], completionHandler: nil)
