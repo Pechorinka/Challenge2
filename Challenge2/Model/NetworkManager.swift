@@ -40,6 +40,15 @@ class FilmsAPIConstructor {
         return URL(string: urlString)
     }
     
+    func getTheCinemaSite(with filmID: Int) -> URL? {
+        let urlString = "https://www.themoviedb.org/movie/\(filmID)"
+        return URL(string: urlString)
+    }
+    
+    func getTheTvShowSite(with filmID: Int) -> URL? {
+        let urlString = "https://www.themoviedb.org/tv/\(filmID)"
+        return URL(string: urlString)
+    }
 }
 
 class NetworkManager {

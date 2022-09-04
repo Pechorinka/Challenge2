@@ -1,6 +1,6 @@
 import Foundation
 
-struct FilmDescriptionData: Codable {
+struct FilmDescriptionData: Decodable {
     
     var id: Int
     var poster_path: String

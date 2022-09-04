@@ -2,20 +2,22 @@
 import UIKit
 import SkeletonView
 
+class FavorireCell: FilmCell {
+    var favoriteFilmsArray = [FavoriteMovieData]()
+}
 
 class FilmCell: UITableViewCell {
+    var onFilmTap: ((CinemaType, Int) -> Void)?
     
-    var onFilmTap: ((FilmsTableSection, Int) -> Void)?
+    var cinemaType: CinemaType = .films
+    var favoriteItemsTypes = [CinemaType]()
+    
     var filmsArray = [CinemaData]() {
         didSet {
             self.filmCollection.reloadData()
         }
     }
-    
-    private let apiConstructor = FilmsAPIConstructor()
-    
-    var cinemaType: FilmsTableSection = .popularMovie
-    
+
     public lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -24,6 +26,8 @@ class FilmCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 23, weight: .bold)
         return label
     } ()
+    
+    private let apiConstructor = FilmsAPIConstructor()
     
     private lazy var filmCollection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -94,10 +98,10 @@ extension FilmCell: UICollectionViewDataSource, UICollectionViewDelegate {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
         
         let film = self.filmsArray[indexPath.row]
-        
+
    //     self.isSkeletonable = true
    //     self.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .black, secondaryColor: .darkGray), animation: nil, transition: .crossDissolve(5))
-        
+
         let posterPath = self.apiConstructor.getImageURL(with: film.poster_path)
         
         cell.setupCell(
@@ -113,6 +117,12 @@ extension FilmCell: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let filmID = self.filmsArray[indexPath.row].id
-        self.onFilmTap?(self.cinemaType, filmID)
+        
+        let type: CinemaType = {
+            guard self.favoriteItemsTypes.indices.contains(indexPath.row) else { return self.cinemaType }
+            return self.favoriteItemsTypes[indexPath.row]
+        }()
+
+        self.onFilmTap?(type, filmID)
     }
 }
