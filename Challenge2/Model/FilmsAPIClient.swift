@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-enum CinemaType {
+enum CinemaType: Int, Decodable {
     case films
     case tvShows
 }
@@ -40,6 +40,22 @@ class FilmsAPIClient {
         }
     }
     
+    func goTheCinemaSite(cinemaId: Int) {
+        let url = self.networkManager.apiConstructor.getTheCinemaSite(with: cinemaId)
+        UIApplication.shared.open(url!,
+                                  options: [:],
+                                  completionHandler: nil
+        )
+    }
+    
+    func goTheTvShowSite(cinemaId: Int) {
+        let url = self.networkManager.apiConstructor.getTheTvShowSite(with: cinemaId)
+        UIApplication.shared.open(url!,
+                                  options: [:],
+                                  completionHandler: nil
+        )
+    }
+
     func getFilmDetailInfo(
         filmID: Int,
         completion: @escaping (Result<(FilmDescriptionData, ActorsData), Error>) -> Void
@@ -81,7 +97,6 @@ class FilmsAPIClient {
             }
         
         group.notify(queue: .main) {
-            print("filmDescription: \(_filmDescription) | castInfo: \(_castInfo)")
             guard let _filmDescription = _filmDescription, let _castInfo = _castInfo else { return }
             completion (.success((_filmDescription, _castInfo)))
         }
@@ -128,7 +143,6 @@ class FilmsAPIClient {
             }
         
         group.notify(queue: .main) {
-            print("filmDescription: \(_filmDescription) | castInfo: \(_castInfo)")
             guard let _filmDescription = _filmDescription, let _castInfo = _castInfo else { return }
             completion (.success((_filmDescription, _castInfo)))
         }

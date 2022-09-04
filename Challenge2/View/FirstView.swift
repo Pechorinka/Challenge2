@@ -3,18 +3,21 @@ import UIKit
 
 class FirstView: UIView {
     
-    var toNextVC: ((FilmsTableSection, Int) -> Void)?
+    var toNextVC: ((CinemaType, Int) -> Void)?
+    
     var filmsArray = [CinemaData]() {
         didSet {
             self.tableView.reloadData()
         }
     }
+    
     var tvShowsArray = [CinemaData]() {
         didSet {
             self.tableView.reloadData()
         }
     }
-    var favoriteFilmsArray = [CinemaData]() {
+    
+    var favoriteFilmsArray = [FavoriteMovieData]() {
         didSet {
             self.tableView.reloadData()
         }
@@ -81,7 +84,7 @@ extension FirstView: UITableViewDataSource, UITableViewDelegate {
         self.makeFilmCell(for: indexPath, tableView: tableView)
     }
     
-    func makeFilmCell(for indexPath: IndexPath, tableView: UITableView) -> FilmCell {
+    func makeFilmCell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         let section = FilmsTableSection(rawValue: indexPath.section)!
         
         let films: [CinemaData] = {
@@ -91,19 +94,41 @@ extension FirstView: UITableViewDataSource, UITableViewDelegate {
             case .tvShos:
                 return self.tvShowsArray
             case .favourites:
-                return self.favoriteFilmsArray
+                return self.favoriteFilmsArray.map { $0.movie }
+            }
+        }()
+        
+        let cinemaType: CinemaType = {
+            switch section {
+            case .popularMovie:
+                return .films
+            case .tvShos:
+                return .tvShows
+            case .favourites:
+                return .films
             }
         }()
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "FilmCell", for: indexPath) as! FilmCell
+        
         cell.filmsArray = films
-        cell.cinemaType = section
+        
+        cell.favoriteItemsTypes = {
+            if section == .favourites {
+                return self.favoriteFilmsArray.map { $0.type }
+            } else {
+                return []
+            }
+        }()
+        
+        cell.cinemaType = cinemaType
         cell.headerLabel.text = section.title
         cell.onFilmTap = {
             [weak self] type, filmID in
             self?.toNextVC?(type, filmID)
         }
         return cell
+
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -129,9 +154,7 @@ extension FirstView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if filmsArray.count == 0 {
-        return 2
-        } else { return 3 }
+        self.favoriteFilmsArray.isEmpty ? 2 : 3
     }
 }
 

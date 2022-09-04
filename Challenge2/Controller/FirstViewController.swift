@@ -6,6 +6,8 @@ class FirstViewController: UIViewController {
     private let firstView = FirstView()
     let apiClient = FilmsAPIClient()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,21 +44,35 @@ class FirstViewController: UIViewController {
             [weak self] type, filmID in
             guard let self = self else { return }
             
-            switch type {
-                
-            case .popularMovie, .tvShos:
-                let nextVC = SecondViewController()
-                nextVC.cinemaType = .init(filmsTableSection: type)!
-                nextVC.filmID = filmID
-                self.navigationController?.pushViewController(nextVC, animated: true)
-                
-            case .favourites:
-                break
-                
-            }
-            
+            let nextVC = SecondViewController()
+            nextVC.delegate = self
+            nextVC.isFavorite = self.firstView.favoriteFilmsArray.contains(where: { $0.movie.id == filmID })
+            nextVC.cinemaType = type //.init(filmsTableSection: type)!
+            nextVC.filmID = filmID
+            self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
+}
+
+extension FirstViewController: ISecondViewControllerDelegate {
+    
+    func didCinemaFavoriteStatusChanged(
+        _ cinemaData: CinemaData,
+        cinemaType: CinemaType,
+        isFavorite: Bool
+    ) {
+        var favoritesMovies = self.firstView.favoriteFilmsArray
+        let movie = FavoriteMovieData(movie: cinemaData, type: cinemaType)
+        
+        if let index = favoritesMovies.firstIndex(of: movie) {
+            favoritesMovies.remove(at: index)
+        } else {
+            favoritesMovies.append(movie)
+        }
+       
+        self.firstView.favoriteFilmsArray = favoritesMovies
+    }
+    
 }
 
 extension CinemaType {

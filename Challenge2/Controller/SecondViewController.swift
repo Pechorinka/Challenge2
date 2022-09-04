@@ -1,11 +1,31 @@
 import UIKit
 
+protocol ISecondViewControllerDelegate: AnyObject {
+    
+    func didCinemaFavoriteStatusChanged(
+        _ cinemaData: CinemaData,
+        cinemaType: CinemaType,
+        isFavorite: Bool
+    )
+}
+
 class SecondViewController: UIViewController {
+    
+    weak var delegate: ISecondViewControllerDelegate?
     
     let apiClient = FilmsAPIClient()
     private let apiConstructor = FilmsAPIConstructor()
     var cinemaType: CinemaType = .films
     var filmID: Int = 0
+    
+    var isFavorite = false {
+        didSet {
+            self.bookmarkButton.tintColor = self.isFavorite ? .red : .white
+            self.bookmarkButton.image = self.isFavorite ? .init(systemName: "bookmark.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .bold, scale: .default)) : .init(systemName: "bookmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .bold, scale: .default))
+        }
+    }
+    
+    private var filmInfo: FilmDescriptionData?
     
     private lazy var bookmarkButton: UIBarButtonItem = {
         let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold, scale: .default)
@@ -13,9 +33,9 @@ class SecondViewController: UIViewController {
                                      style: .plain,
                                      target: self,
                                      action: #selector(self.bookmarkButtonTapped)
-                                     )
-        button.tintColor = UIColor.white
-
+        )
+        button.tintColor = self.isFavorite ? .red : .white
+        button.image = self.isFavorite ? .init(systemName: "bookmark.fill", withConfiguration: config) : .init(systemName: "bookmark", withConfiguration: config)
         return button
     }()
     
@@ -25,19 +45,19 @@ class SecondViewController: UIViewController {
                                      style: .plain,
                                      target: self,
                                      action: #selector(self.popViewControler)
-                                     )
+        )
         button.tintColor = UIColor.white
         
         return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupNavigationBar()
         self.view.backgroundColor = .black
         
         self.navigationItem.rightBarButtonItem = self.bookmarkButton
-
+        
         self.navigationItem.leftBarButtonItem = self.closeButton
         
         self.apiClient.getCinema(of: self.cinemaType, cinemaId: self.filmID) { result in
@@ -49,9 +69,16 @@ class SecondViewController: UIViewController {
             }
         }
     }
-        
+    
     @objc private func bookmarkButtonTapped() {
-        print("bookmarkButtonTapped")
+        self.isFavorite.toggle()
+        guard let filmInfo = filmInfo else { return }
+        
+        self.delegate?.didCinemaFavoriteStatusChanged(
+            .init(filmInfo: filmInfo),
+            cinemaType: self.cinemaType,
+            isFavorite: self.isFavorite
+        )
     }
     
     @objc func popViewControler(){
@@ -59,6 +86,7 @@ class SecondViewController: UIViewController {
     }
     
     func setupViewWithData(_ filmInfo: FilmDescriptionData, _ castInfo: ActorsData) {
+        self.filmInfo = filmInfo
         let filmInfoView = self.makeFilmInfoView(with: filmInfo, modelCast: castInfo)
         
         self.view.addSubview(filmInfoView)
@@ -77,11 +105,24 @@ class SecondViewController: UIViewController {
             filmDescription: modelFilm.overview,
             posterURL: posterPath,
             cast: modelCast
-        )
+        ) {
+            [weak self] in
+            guard let self = self else { return }
+            
+            if self.cinemaType == .films {
+                self.apiClient.goTheCinemaSite(cinemaId: modelFilm.id)
+            } else {
+                self.apiClient.goTheTvShowSite(cinemaId: modelFilm.id)
+            }
+        }
         
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }
+    
+}
+
+extension SecondViewController {
     
     private func dateFromWebtoApp(_ date: String) -> String {
         let dateFormatter = DateFormatter()

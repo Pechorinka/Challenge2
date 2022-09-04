@@ -4,6 +4,7 @@ import Kingfisher
 class SecondView: UIView {
     
     private let idCollectionView = "idCollectionView"
+    private let buttonHandler: (() -> Void)?
     
     private let apiConstructor = FilmsAPIConstructor()
     private let nameFilm: String
@@ -26,11 +27,11 @@ class SecondView: UIView {
     private lazy var filmImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .red
-        imageView.kf.setImage(with: posterURL)
+        imageView.kf.setImage(with: self.posterURL)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-        imageView.addSubview(shadowView)
-
+        imageView.addSubview(self.shadowView)
+        
         return imageView
     }()
     
@@ -41,19 +42,19 @@ class SecondView: UIView {
         label.numberOfLines = 0
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 52, weight: .bold)
-
+        
         return label
     }()
     
     private lazy var genreLabel: UILabel = {
         let label = UILabel()
-        let genres = self.genres.joined(separator: ",")
+        let genres = self.genres.joined(separator: ", ")
         
         label.text = "\(self.year), \(genres), \((self.runtime * 60.0).asString(style: .short))"
         label.textColor = .white
         label.numberOfLines = 0
         label.textAlignment = .center
-
+        
         return label
     }()
     
@@ -74,10 +75,10 @@ class SecondView: UIView {
             images[2].tintColor = .yellow
         }
         if self.getStarsRating >= 8 {
-        images[3].tintColor = .yellow
+            images[3].tintColor = .yellow
         }
         if self.getStarsRating == 10 {
-        images[4].tintColor = .yellow
+            images[4].tintColor = .yellow
         }
         return images
     }()
@@ -99,7 +100,7 @@ class SecondView: UIView {
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.6
         label.text = self.filmDescription
-
+        
         return label
     }()
     
@@ -125,7 +126,7 @@ class SecondView: UIView {
         label.font = UIFont.systemFont(ofSize: 26, weight: .medium)
         label.textColor = .white
         label.textAlignment = .left
-
+        
         return label
     }()
     
@@ -151,6 +152,7 @@ class SecondView: UIView {
         button.setTitle("Watch Now", for: .normal)
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(self.watchNowButtonTapped), for: .touchUpInside)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.widthAnchor.constraint(equalToConstant: 200.0).isActive = true
@@ -208,7 +210,8 @@ class SecondView: UIView {
          getStarsRating: Float,
          filmDescription: String,
          posterURL: URL?,
-         cast: ActorsData
+         cast: ActorsData,
+         buttonHandler: @escaping () -> Void
     ) {
         self.nameFilm = nameFilm
         self.year = year
@@ -218,6 +221,7 @@ class SecondView: UIView {
         self.filmDescription = filmDescription
         self.posterURL = posterURL
         self.cast = cast
+        self.buttonHandler = buttonHandler
         
         super.init(frame: .zero)
         
@@ -229,13 +233,8 @@ class SecondView: UIView {
     }
     
     @objc private func watchNowButtonTapped() {
-        // если фильм
-//        UIApplication.shared.open(URL(string: "https://www.themoviedb.org/movie/" + "\(idOfCinema)")! as URL, options: [:], completionHandler: nil)
-        
-        // если сериал
-        // UIApplication.shared.open(URL(string: "https://www.themoviedb.org/tv" + "\(id)")! as URL, options: [:], completionHandler: nil)
-        
         watchNowButton.pulsate()
+        self.buttonHandler?()
     }
     
     private func setupViews() {
@@ -263,7 +262,7 @@ class SecondView: UIView {
             self.collectionView.heightAnchor.constraint(equalToConstant: 130),
             
             self.filmImageView.bottomAnchor.constraint(equalTo: self.textStackView.topAnchor, constant: 20.0),
-            ])
+        ])
     }
     
 }
@@ -288,7 +287,7 @@ extension SecondView: UICollectionViewDataSource {
         let cast = self.cast.cast[indexPath.row]
         
         let posterPath = self.apiConstructor.getImageURL(with: cast.profile_path ?? "")
-//        
+        //
         cell.setupCell(
             nameActorLabel: cast.name,
             roleLabel: (cast.character ?? cast.roles?[0].character) ?? "",
